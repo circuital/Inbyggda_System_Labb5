@@ -9,8 +9,8 @@ void uart_init(void) {
 	UBRR0H = (unsigned char)(UBRR >> 8);
 	UBRR0L = (unsigned char)(UBRR);
 	UCSR0A = 0;
-	UCSR0B = (1 << TXEN0 | 1 << RXEN0);
-	UCSR0C = (1 << UCSZ01 | 1 << UCSZ00);
+	UCSR0B = ((1 << TXEN0) | (1 << RXEN0));
+	UCSR0C = ((1 << UCSZ01) | (1 << UCSZ00));
 
 	stdout = &uart_stdout;
 }
