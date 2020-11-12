@@ -1,46 +1,57 @@
-#include <avr/interrupt.h>
 #include <avr/io.h>
-#include <stdio.h>
 #include <avr/pgmspace.h>
-#include <util/delay.h>
+#include <avr/interrupt.h>
+#include <stdio.h>
 
 #include "serial.h"
+#include "buttons.h"
 
 int main(void)
 {
     uart_init();
+    buttons_init();
 
     while (1)
     {
         if (PINB & (1 << PB0))
         {
-            //printf_P(PSTR("%c\n"), 'F');
             while (!(UCSR0A & (1 << UDRE0)));
-            UDR0 = 'F'; //FORWARD
+            UDR0 = FORWARD; //FORWARD
         }
         else if (PINB & (1 << PB1))
         {
-            //printf_P(PSTR("%c\n"), 'B');
             while (!(UCSR0A & (1 << UDRE0)));
-            UDR0 = 'B'; //BACK
+            UDR0 = BACK; //BACK
         }
         else if (PINB & (1 << PB2))
         {
-            //printf_P(PSTR("%c\n"), 'L');
             while (!(UCSR0A & (1 << UDRE0)));
-            UDR0 = 'L'; //LEFT
+            UDR0 = LEFT; //LEFT
         }
         else if (PINB & (1 << PB3))
         {
-            //printf_P(PSTR("%c\n"), 'R');
             while (!(UCSR0A & (1 << UDRE0)));
-            UDR0 = 'R'; //RIGHT
+            UDR0 = RIGHT; //RIGHT
         }
-        else
+        else if ((PINB & (1 << PB0)) && (PINB & (1 << PB2)))
         {
-            //printf_P(PSTR("%c\n"), 'S');
             while (!(UCSR0A & (1 << UDRE0)));
-            UDR0 = 'S'; //STOP
+            UDR0 = FORWARDLEFT; //FORWARDLEFT
+        }
+        else if ((PINB & (1 << PB0)) && (PINB & (1 << PB3)))
+        {
+            while (!(UCSR0A & (1 << UDRE0)));
+            UDR0 = FORWARDRIGHT; //FORWARDRIGHT
+        }
+        else if ((PINB & (1 << PB1)) && (PINB & (1 << PB2)))
+        {
+            while (!(UCSR0A & (1 << UDRE0)));
+            UDR0 = BACKLEFT; //BACKLEFT
+        }
+        else if ((PINB & (1 << PB1)) && (PINB & (1 << PB3)))
+        {
+            while (!(UCSR0A & (1 << UDRE0)));
+            UDR0 = BACKRIGHT; //BACKRIGHT
         }
     }
     return 0;
