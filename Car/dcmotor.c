@@ -1,3 +1,11 @@
+#include <avr/io.h>
+#include <util/delay.h>
+#include <avr/pgmspace.h>
+
+#include <stdio.h>
+#include <string.h>
+
+#include "dcmotor.h"
 
 void dcmotor1_init(void)
 {
