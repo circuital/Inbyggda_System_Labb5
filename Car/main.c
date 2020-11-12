@@ -2,10 +2,18 @@
 #include <stdio.h>
 #include <avr/pgmspace.h>
 #include <util/delay.h>     // delay library
+  
+#include <avr/interrupt.h>
 
 #include "serial.h"
 #include "dcmotor.h"
 
+static volatile char controllerCommand = '';
+
+ISR(USART_RX_vect)
+{
+controllerCommand = UDR0;
+}
 
 int main(void)
 {
@@ -17,51 +25,26 @@ int main(void)
 
     while (1)   //infinite loop
     {
-   
-        right();
-        _delay_ms(1000);
-
-        dcmotor1_stop();
-        dcmotor2_stop();
-        left();
-        _delay_ms(1000);
-
-        dcmotor1_stop();
-        dcmotor2_stop();
-        back();
-        _delay_ms(1000);
-
-        dcmotor1_stop();
-        dcmotor2_stop();
-        forward();
-        _delay_ms(1000);
-
-        dcmotor1_stop();
-        dcmotor2_stop();
-        _delay_ms(1000);
-
-    //    char c = uart_getchar();
-    //    if (c == '1')
-    //    {
-    //        forward();
-    //    }
-    //    else if (c == '2')
-    //    {
-    //        back();
-    //    }
-    //    else if (c == '3')
-    //    {
-    //        left();
-    //    }
-    //    else if (c == '4')
-    //    {
-    //        right();
-    //    }
-    //    else
-    //    {
-    //        dcmotor1_stop();
-    //        dcmotor2_stop();
-    //    }
-    //    printf_P(PSTR("%c\n"), c);
+       if (controllerCommand == '1')
+       {
+           forward();
+       }
+       else if (controllerCommand == '2')
+       {
+           back();
+       }
+       else if (controllerCommand == '3')
+       {
+           left();
+       }
+       else if (controllerCommand == '4')
+       {
+           right();
+       }
+       else
+       {
+           dcmotor1_stop();
+           dcmotor2_stop();
+       }
     }
 }
