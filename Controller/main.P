@@ -7,7 +7,7 @@ main.o: main.c /usr/lib/avr/include/avr/interrupt.h \
  /usr/lib/avr/include/avr/lock.h /usr/lib/avr/include/stdio.h \
  /usr/lib/gcc/avr/4.9.2/include/stdarg.h \
  /usr/lib/gcc/avr/4.9.2/include/stddef.h \
- /usr/lib/avr/include/util/delay.h \
+ /usr/lib/avr/include/avr/pgmspace.h /usr/lib/avr/include/util/delay.h \
  /usr/lib/avr/include/util/delay_basic.h /usr/lib/avr/include/math.h \
  serial.h
 main.c /usr/lib/avr/include/avr/interrupt.h :
@@ -19,6 +19,6 @@ main.c /usr/lib/avr/include/avr/interrupt.h :
  /usr/lib/avr/include/avr/lock.h /usr/lib/avr/include/stdio.h :
  /usr/lib/gcc/avr/4.9.2/include/stdarg.h :
  /usr/lib/gcc/avr/4.9.2/include/stddef.h :
- /usr/lib/avr/include/util/delay.h :
+ /usr/lib/avr/include/avr/pgmspace.h /usr/lib/avr/include/util/delay.h :
  /usr/lib/avr/include/util/delay_basic.h /usr/lib/avr/include/math.h :
  serial.h :

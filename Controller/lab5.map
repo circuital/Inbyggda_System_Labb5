@@ -372,9 +372,9 @@ END GROUP
  .stab          0x0000000000000bdc      0x450 serial.o
                                         0x66c (size before relaxing)
 
-.stabstr        0x0000000000000000      0xe18
+.stabstr        0x0000000000000000      0xdfc
  *(.stabstr)
- .stabstr       0x0000000000000000      0xe18 main.o
+ .stabstr       0x0000000000000000      0xdfc main.o
 
 .stab.excl
  *(.stab.excl)
