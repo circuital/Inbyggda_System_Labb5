@@ -7,7 +7,7 @@ SOURCES = \
 		  slave.c \
 		  dcmotor.c
 
-PORT =/dev/ttyS6# Arduinons serieport — kan vara ttyACM1, kolla dmesg!
+PORT =/dev/ttyS5# Arduinons serieport — kan vara ttyACM1, kolla dmesg!
 MCU=atmega328p
 
 CC =avr-gcc
