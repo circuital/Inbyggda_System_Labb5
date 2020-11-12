@@ -7,53 +7,90 @@
 
 #include "dcmotor.h"
 
-void dcmotor1_init(void)
+void dcmotor_init(void)
 {
-	DDRB |= (1 << PB1); // set pin 9 on Arduino board to output
+
+	/*motor for forward and back*/
 	DDRB |= (1 << PB0); // set pin 8 on Arduino board to output
-}
+	DDRB |= (1 << PB1); // set pin 9 on Arduino board to output
 
-void dcmotor2_init(void)
-{
-	DDRB |= (1 << PB3); // set pin 11 on Arduino board to output
+	/*motor for left and right*/
 	DDRB |= (1 << PB2); // set pin 10 on Arduino board to output
+	DDRB |= (1 << PB3); // set pin 11 on Arduino board to output
+
 }
 
-void dcmotor1_forward(void)
+
+
+void forward(void)
 {
 	PORTB |= (1 << PB0);// set pin 8 on Arduino board to HIGH
 	PORTB &= ~(1 << PB1);// set pin 9 on Arduino board to LOW
 
 }
 
-void dcmotor2_forward(void)
+void back(void)
 {
-	PORTB |= (1 << PB2);// set pin 0 on Arduino board to HIGH
-	PORTB &= ~(1 << PB3);// set pin 9 on Arduino board to LOW
+
+	PORTB &= ~(1 << PB0);// set pin 8 on Arduino board to LOW
+	PORTB |= (1 << PB1);// set pin 9 on Arduino board to HIGH
 }
 
-void dcmotor1_back(void)
+void right(void)
 {
-
-	PORTB |= (1 << PB1);// set pin 0 on Arduino board to HIGH
-	PORTB &= ~(1 << PB0);// set pin 9 on Arduino board to LOW
+	PORTB |= (1 << PB2);// set pin 10 on Arduino board to HIGH
+	PORTB &= ~(1 << PB3);// set pin 11 on Arduino board to LOW
 }
 
-void dcmotor2_back(void)
+void left(void)
 {
 
-	PORTB |= (1 << PB3);// set pin 0 on Arduino board to HIGH
-	PORTB &= ~(1 << PB2);// set pin 9 on Arduino board to LOW
+	PORTB &= ~(1 << PB2);// set pin 10 on Arduino board to LOW
+	PORTB |= (1 << PB3);// set pin 11 on Arduino board to HIGH
+}
+
+void forwardleft(void)
+{
+	PORTB |= (1 << PB0);// set pin 8 on Arduino board to HIGH
+	PORTB &= ~(1 << PB1);// set pin 9 on Arduino board to LOW
+
+	PORTB &= ~(1 << PB2);// set pin 10 on Arduino board to LOW
+	PORTB |= (1 << PB3);// set pin 11 on Arduino board to HIGH
+}
+void forwardright(void)
+{
+	PORTB |= (1 << PB0);// set pin 8 on Arduino board to HIGH
+	PORTB &= ~(1 << PB1);// set pin 9 on Arduino board to LOW
+
+	PORTB |= (1 << PB2);// set pin 10 on Arduino board to HIGH
+	PORTB &= ~(1 << PB3);// set pin 11 on Arduino board to LOW
+
+}
+void backleft(void)
+{
+	PORTB &= ~(1 << PB0);// set pin 8 on Arduino board to LOW
+	PORTB |= (1 << PB1);// set pin 9 on Arduino board to HIGH
+
+	PORTB &= ~(1 << PB2);// set pin 10 on Arduino board to LOW
+	PORTB |= (1 << PB3);// set pin 11 on Arduino board to HIGH
+}
+void backright(void)
+{
+	PORTB &= ~(1 << PB0);// set pin 8 on Arduino board to LOW
+	PORTB |= (1 << PB1);// set pin 9 on Arduino board to HIGH
+
+	PORTB |= (1 << PB2);// set pin 10 on Arduino board to HIGH
+	PORTB &= ~(1 << PB3);// set pin 11 on Arduino board to LOW
 }
 
 void dcmotor1_stop(void)
 {
-	PORTB &= ~(1 << PB0);// set pin 9 on Arduino board to LOW
+	PORTB &= ~(1 << PB0);// set pin 8 on Arduino board to LOW
 	PORTB &= ~(1 << PB1);// set pin 9 on Arduino board to LOW
 }
 
 void dcmotor2_stop(void)
 {
-	PORTB &= ~(1 << PB2);// set pin 9 on Arduino board to LOW
-	PORTB &= ~(1 << PB3);// set pin 9 on Arduino board to LOW
+	PORTB &= ~(1 << PB2);// set pin 10 on Arduino board to LOW
+	PORTB &= ~(1 << PB3);// set pin 11 on Arduino board to LOW
 }
