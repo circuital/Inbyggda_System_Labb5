@@ -3,11 +3,11 @@ BIN = lab5# namn på output-binären
 # Lista på C-ﬁler ingående i binären
 SOURCES = \
 		  main.c \
-		  button.c \
+		  buttons.c \
 		  master.c \
 		  serial.c
 
-PORT =/dev/ttyS3# Arduinons serieport — kan vara ttyACM1, kolla dmesg!
+PORT =/dev/ttyS4# Arduinons serieport — kan vara ttyACM1, kolla dmesg!
 MCU=atmega328p
 
 CC =avr-gcc

@@ -1,0 +1,2 @@
+master.o: master.c
+master.c :
