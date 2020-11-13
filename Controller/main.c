@@ -7,9 +7,12 @@
 #include "buttons.h"
 #include "timer.h"
 
+char command;
+
 ISR(TIMER0_COMPA_vect)
 {
-    uart_send_command(get_button_command());
+    command = get_button_command();
+    uart_send_command(command);
 }
 
 int main(void)
