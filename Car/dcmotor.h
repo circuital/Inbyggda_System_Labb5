@@ -18,4 +18,6 @@ void backright(void);
 void dcmotor1_stop(void);
 void dcmotor2_stop(void);
 
+void motor_executer(char command);
+
 #endif 

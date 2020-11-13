@@ -94,3 +94,40 @@ void dcmotor2_stop(void)
 	PORTB &= ~(1 << PB2);// set pin 10 on Arduino board to LOW
 	PORTB &= ~(1 << PB3);// set pin 11 on Arduino board to LOW
 }
+
+void motor_executer(char command)
+{
+	switch (command)
+	{
+	case '1':
+		forward();
+		break;
+	case '2':
+		back();
+		break;
+	case '3':
+		left();
+		break;
+	case '4':
+		right();
+		break;
+	case '5':
+		forwardleft();
+		break;
+	case '6':
+		forwardright();
+		break;
+	case '7':
+		backleft();
+		break;		
+	case '8':		
+		backright();
+		break;
+	case '0':
+		dcmotor1_stop();
+		dcmotor2_stop();
+		break;
+	default:
+		break;
+	}
+}

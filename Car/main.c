@@ -21,46 +21,8 @@ int main(void)
     uart_init();
 
 
-    //DDRB |= (1 << PB0);
-
     while (1)   //infinite loop
     {
-       if (controllerCommand == '1')
-       {
-           forward();
-       }
-       else if (controllerCommand == '2')
-       {
-           back();
-       }
-       else if (controllerCommand == '3')
-       {
-           left();
-       }
-       else if (controllerCommand == '4')
-       {
-           right();
-       }
-       else if (controllerCommand == '5')
-       {
-           forwardleft();
-       }
-       else if (controllerCommand == '6')
-       {
-           forwardright();
-       }
-       else if (controllerCommand == '7')
-       {
-           backleft();
-       }
-       else if (controllerCommand == '8')
-       {
-           backright();
-       }
-       else
-       {
-           dcmotor1_stop();
-           dcmotor2_stop();
-       }
+        motor_executer(controllerCommand);
     }
 }
