@@ -4,6 +4,7 @@
 #define BAUDRATE 38400
 #define UBRR (F_CPU/16/BAUDRATE-1)
 
+#define STOP '0'
 #define FORWARD '1'
 #define BACK '2'
 #define LEFT '3'
@@ -14,5 +15,7 @@
 #define BACKRIGHT '8'
 
 void buttons_init(void);
+
+char get_button_command(void);
 
 #endif

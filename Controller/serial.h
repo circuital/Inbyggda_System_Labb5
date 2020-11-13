@@ -10,4 +10,6 @@ int uart_putchar(char chr, FILE* stream);
 
 char uart_getchar(void);
 
+void uart_send_command(char command);
+
 #endif
