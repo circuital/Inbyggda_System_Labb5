@@ -8,7 +8,7 @@
 #include "serial.h"
 #include "dcmotor.h"
 
-static volatile char controllerCommand = '';
+static volatile char controllerCommand;
 
 ISR(USART_RX_vect)
 {
@@ -40,6 +40,22 @@ int main(void)
        else if (controllerCommand == '4')
        {
            right();
+       }
+       else if (controllerCommand == '5')
+       {
+           forwardleft();
+       }
+       else if (controllerCommand == '6')
+       {
+           forwardright();
+       }
+       else if (controllerCommand == '7')
+       {
+           backleft();
+       }
+       else if (controllerCommand == '8')
+       {
+           backright();
        }
        else
        {

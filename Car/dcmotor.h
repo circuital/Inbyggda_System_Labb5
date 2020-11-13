@@ -9,6 +9,12 @@ void right(void);
 void back(void);
 void left(void);
 
+void forwardleft(void);
+void forwardright(void);
+
+void backleft(void);
+void backright(void);
+
 void dcmotor1_stop(void);
 void dcmotor2_stop(void);
 
