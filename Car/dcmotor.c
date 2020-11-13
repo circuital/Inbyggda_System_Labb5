@@ -97,7 +97,7 @@ void dcmotor2_stop(void)
 
 void motor_executer(char command)
 {
-	switch (command)
+	switch (command)//switch case
 	{
 	case '1':
 		forward();
