@@ -2,6 +2,9 @@
 #include <stdio.h>
 
 #include "serial.h"
+#include "buttons.h"
+
+char lastCommand = STOP;
 
 static FILE uart_stdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
@@ -35,7 +38,11 @@ char uart_getchar(void)
 
 void uart_send_command(char command)
 {
-	while (!(UCSR0A & (1 << UDRE0)));
-	UDR0 = command;
+	if (command != lastCommand)
+	{
+		while (!(UCSR0A & (1 << UDRE0)));
+		UDR0 = command;
+		lastCommand = command;
+	}
 }
 
