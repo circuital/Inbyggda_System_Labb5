@@ -5,7 +5,8 @@ SOURCES = \
 		  main.c \
 		  buttons.c \
 		  master.c \
-		  serial.c
+		  serial.c \
+		  timer.c 
 
 PORT =/dev/ttyS3# Arduinons serieport — kan vara ttyACM1, kolla dmesg!
 MCU=atmega328p
