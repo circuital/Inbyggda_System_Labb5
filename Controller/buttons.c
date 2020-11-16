@@ -3,6 +3,8 @@
 
 #include "buttons.h"
 
+char commandArray[10];
+
 void buttons_init(void)
 {
 	DDRB &= ~(1 << PB0); //FORWARD
@@ -49,4 +51,14 @@ char get_button_command()
     {
         return STOP; //STOP
     }
+}
+
+char* get_button_command_array()
+{ 
+    int i;
+    for (i = 0; i <= 9; i++)
+    {
+        commandArray[i] = get_button_command();
+    }
+    return commandArray;
 }
