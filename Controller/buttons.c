@@ -11,6 +11,8 @@ void buttons_init(void)
 	DDRB &= ~(1 << PB1); // BACK
 	DDRB &= ~(1 << PB2); // LEFT
 	DDRB &= ~(1 << PB3); // RIGHT
+	DDRB &= ~(1 << PB4); // MODE CHANGER
+	DDRB &= ~(1 << PB5); // START
 }
 
 char get_button_command()
@@ -47,18 +49,26 @@ char get_button_command()
     {
         return BACKRIGHT; //BACKRIGHT
     }
+    else if (PINB & (1 << PB4))
+    {
+        return CHANGEMODE;
+    }
+    else if (PINB & (1 << PB5))
+    {
+        return START;
+    }
     else
     {
         return STOP; //STOP
     }
 }
 
-char* get_button_command_array()
-{ 
-    int i;
-    for (i = 0; i <= 9; i++)
-    {
-        commandArray[i] = get_button_command();
-    }
-    return commandArray;
-}
+//char* get_button_command_array()
+//{ 
+//    int i;
+//    for (i = 0; i <= 9; i++)
+//    {
+//        commandArray[i] = get_button_command();
+//    }
+//    return commandArray;
+//}

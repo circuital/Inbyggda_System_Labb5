@@ -6,6 +6,10 @@
 #include <string.h>
 
 #include "dcmotor.h"
+#include "timer.h"
+
+static char STEM_commands[10];
+
 
 void dcmotor_init(void)
 {
@@ -95,7 +99,7 @@ void dcmotor2_stop(void)
 	PORTB &= ~(1 << PB3);// set pin 11 on Arduino board to LOW
 }
 
-void motor_executer(char command)
+void basic_executer(char command)
 {
 	switch (command)//switch case
 	{
@@ -126,6 +130,94 @@ void motor_executer(char command)
 	case '0':
 		dcmotor1_stop();
 		dcmotor2_stop();
+		break;
+	default:
+		break;
+	}
+}
+
+void STEM_save_to_array(char command)
+{
+	static int i = 0;
+	if (command != '0')
+	{
+		STEM_commands[i] = command;
+		i++;
+	}
+
+	if (command == 'S' || i == 10)
+	{
+		STEM_read_array();
+		i = 0;
+	}
+}
+
+void STEM_read_array()
+{
+	int j = 0;
+	fo(j; j < size_of(STEM_commands); j++)
+	{
+		STEM_executer(STEM[j]);
+	}
+}
+
+void STEM_executer(char command)
+{
+	static uint8_t car_dir = 0; // Checks the cars direction, 0 = forward, 1 = back. Forward by default
+	unit8_t stop = 0;
+	switch (command)//switch case
+	{
+	case '1':
+		car_dir = 0; // set the direction to forward
+		while (!stop)
+		{
+			forward();
+			stop = timer_executer();
+		}
+		break;
+	case '2':
+		car_dir = 1; // set the direction to back
+		while (!stop)
+		{
+			back();
+			stop = timer_executer();
+		}
+		break;
+	case '3':
+		if (car_dir == 0)
+		{
+			while (!stop)
+			{
+				forwardleft();
+				stop = timer_executer();
+			}
+		}
+		else if (car_dir == 1)
+		{
+			while (!stop)
+			{
+				backleft();
+				stop = timer_executer();
+			}
+		}
+		break;
+	case '4':
+		if (car_dir == 0)
+		{
+			while (!stop)
+			{
+				forwardright();
+				stop = timer_executer();
+			}
+		}
+		else if (car_dir == 1)
+		{
+			while (!stop)
+			{
+				backright();
+				stop = timer_executer();
+			}
+		}
 		break;
 	default:
 		break;

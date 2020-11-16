@@ -13,6 +13,8 @@
 #define FORWARDRIGHT '6'
 #define BACKLEFT '7'
 #define BACKRIGHT '8'
+#define CHANGEMODE '9'
+#define START 'S'
 
 void buttons_init(void);
 

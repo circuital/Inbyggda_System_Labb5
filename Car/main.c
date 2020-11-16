@@ -7,7 +7,7 @@
 
 #include "serial.h"
 #include "dcmotor.h"
-
+static uint8_t state = 0;
 static volatile char controllerCommand;
 
 ISR(USART_RX_vect)
@@ -23,6 +23,35 @@ int main(void)
 
     while (1)   //infinite loop
     {
-        motor_executer(controllerCommand);
+        //motor_executer(controllerCommand);
+        state_handler(controllerCommand);
+        state_executer(controllerCommand);
+    }
+}
+
+void state_handler(char command)
+{
+    if (command == '9')
+    {
+        if (state == 0)
+        {
+            state = 1;
+        }
+        else if (state == 1)
+        {
+            state = 0;
+        }
+    }
+}
+
+void state_executer(char command)
+{
+    if (state == 0)
+    {
+        basic_executer(command)
+    }
+    else if (state == 1)
+    {
+        STEM_save_to_array(command);
     }
 }
