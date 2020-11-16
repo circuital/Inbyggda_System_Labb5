@@ -2,5 +2,7 @@
 #define _TIMER_H_
 
 void timer_init(void);
+
 int timer_executer(void);
+
 #endif
