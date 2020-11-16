@@ -8,7 +8,7 @@
 #include "dcmotor.h"
 #include "timer.h"
 
-static char STEM_commands[10];
+static char STEM_commands[10];	
 
 
 void dcmotor_init(void)
@@ -154,17 +154,17 @@ void STEM_save_to_array(char command)
 
 void STEM_read_array()
 {
-	int j = 0;
-	fo(j; j < size_of(STEM_commands); j++)
+	int j;
+	for(j = 0; j < sizeof(STEM_commands); j++)
 	{
-		STEM_executer(STEM[j]);
+		STEM_executer(STEM_commands[j]);
 	}
 }
 
 void STEM_executer(char command)
 {
 	static uint8_t car_dir = 0; // Checks the cars direction, 0 = forward, 1 = back. Forward by default
-	unit8_t stop = 0;
+	uint8_t stop = 0;
 	switch (command)//switch case
 	{
 	case '1':

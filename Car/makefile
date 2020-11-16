@@ -4,7 +4,7 @@ BIN = lab5# namn på output-binären
 SOURCES = \
 		  main.c \
 		  serial.c \
-		  slave.c \
+		  timer.c \
 		  dcmotor.c
 
 PORT =/dev/ttyS5# Arduinons serieport — kan vara ttyACM1, kolla dmesg!
