@@ -7,6 +7,7 @@
 
 #include "serial.h"
 #include "dcmotor.h"
+#include "timer.h"
 static uint8_t state = 0;
 static volatile char controllerCommand;
 
@@ -15,18 +16,18 @@ ISR(USART_RX_vect)
 controllerCommand = UDR0;
 }
 
-void state_handler(char command)
+void state_handler()
 {
-    if (command == 'C')
+    printf_P(PSTR(" state_handler\n"));
+    if (state == 0)
     {
-        if (state == 0)
-        {
-            state = 1;
-        }
-        else if (state == 1)
-        {
-            state = 0;
-        }
+        state = 1;
+        printf_P(PSTR(" %c\n"), state);
+    }
+    else if (state == 1)
+    {
+        state = 0;
+        printf_P(PSTR(" %c\n"), state);
     }
 }
 
@@ -45,13 +46,20 @@ int main(void)
 {
     dcmotor_init();
     uart_init();
+    timer_init();
 
 
-    while (1)   //infinite loop
+    while (1) 
     {
         //motor_executer(controllerCommand);
-        state_handler(controllerCommand);
-        state_executer(controllerCommand);
-        printf_P(PSTR(" %c\n"), controllerCommand);
+        if (controllerCommand == 'C')
+        {
+            state_handler();
+            controllerCommand = '0';
+        }
+        else
+        {
+            state_executer(controllerCommand);
+        }
     }
 }

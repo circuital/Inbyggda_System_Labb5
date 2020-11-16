@@ -21,6 +21,7 @@ int timer_executer()
 	TIFR0 = (1 << OCF0A); // reset flag
 	if (timer == 100)
 	{
+		timer = 0;
 		return 1;
 	}
 	else
