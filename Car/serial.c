@@ -15,7 +15,7 @@ void uart_init(void)
 	UCSR0C = ((1 << UCSZ01) | (1 << UCSZ00));
 
 	stdout = &uart_stdout;
-	sei(); //enable interrupt 
+	sei();
 }
 
 int uart_putchar(char chr, FILE* stream)

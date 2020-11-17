@@ -24,8 +24,11 @@ void dcmotor1_stop(void);
 void dcmotor2_stop(void);
 
 void basic_executer(char command);
+
 void STEM_executer(char command);
+
 void STEM_save_to_array(char command);
+
 void STEM_read_array(void);
 
 #endif 

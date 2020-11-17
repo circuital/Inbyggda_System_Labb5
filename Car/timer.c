@@ -1,6 +1,6 @@
 #include <avr/io.h>
-#include "timer.h"
 
+#include "timer.h"
 
 void timer_init()
 {
@@ -17,15 +17,16 @@ void timer_init()
 
 int timer_executer()
 {
-	static timer = 0;
-	if (TIFR0 & (1 << OCF0A)) // check CTC flag
+	static counter = 0;
+	if (TIFR0 & (1 << OCF0A)) //Check CTC flag
 	{
-		timer++;
+		counter++;
 	}
-	TIFR0 = (1 << OCF0A); // reset flag
-	if (timer == 100)
+	TIFR0 = (1 << OCF0A); //Reset CTC flag
+
+	if (counter == 100)
 	{
-		timer = 0;
+		counter = 0;
 		return 1;
 	}
 	else
