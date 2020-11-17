@@ -3,7 +3,7 @@
 
 void LCD_init(void);
 
-void LCD_command(unsigned char command);
+void LCD_command(unsigned char cmnd);
 
 void LCD_char(unsigned char data);
 

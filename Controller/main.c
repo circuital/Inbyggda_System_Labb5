@@ -4,8 +4,8 @@
 #include <stdio.h>
 
 #include "serial.h"
-#include "timer.h"
 #include "buttons.h"
+#include "timer.h"
 #include "lcd.h"
 
 char command;
@@ -21,7 +21,6 @@ int main(void)
     uart_init();
     timer_init();
     buttons_init();
-    LCD_init();
 
     while (1)
     {

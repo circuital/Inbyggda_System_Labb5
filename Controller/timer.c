@@ -14,6 +14,7 @@ void timer_init(void)
 
 	TCNT0 = 0x00; //Timer/Counter Register (stores the counter value). Set to 0 to initiate.
 	OCR0A = 0x9C; //Output Compare Register. Set to 156 for 10ms cycle.
+	TIMSK0 |= (1 << OCIE0A);//Compare match interrupt
 
     sei();
 }

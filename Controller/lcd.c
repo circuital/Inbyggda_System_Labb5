@@ -5,32 +5,30 @@
 
 //#define F_CPU 16000000UL
 
-#define LCD_Dir  DDRD //Define LCD data port direction 
+#define LCD_Dir  DDRD //Define LCD data port direction
 #define LCD_Port PORTD //Define LCD data port
 #define RS PD2 //Define Register Select pin
-#define EN PD3 //Define Enable signal pin 
- 
+#define EN PD3 //Define Enable signal pin
 
 void LCD_init(void)
 {
-	LCD_Dir = 0xFF; //Make LCD port direction as o/p 
-	_delay_ms(20);
+	LCD_Dir = 0xFF; //Make LCD port direction as o/p
+	_delay_ms(20); //LCD Power ON delay always >15ms
 	LCD_command(0x33);
 	LCD_command(0x32); //Send for 4 bit initialization of LCD
-	LCD_command(0x28); //2 line, 5*7 matrix in 4-bit mode 
-	LCD_command(0x0c); //Display on cursor off 
-	LCD_command(0x06); //Increment cursor (shift cursor to right) 
-	LCD_command(0x01); //Clear display screen 
+	LCD_command(0x28); //2 line, 5*7 matrix in 4-bit mode
+	LCD_command(0x0c); // Display on cursor off
+	LCD_command(0x06); // Increment cursor (shift cursor to right)
+	LCD_command(0x01); //Clear display screen
     _delay_ms(2);
 	LCD_command (0x80); //Cursor 1st row 0th position
 }
  
-
 void LCD_command(unsigned char command)
 {
 	LCD_Port = (LCD_Port & 0x0F) | (cmnd & 0xF0); //Sending upper nibble
-	LCD_Port &= ~ (1<<RS); //RS=0, command reg
-	LCD_Port |= (1<<EN); //Enable pulse
+	LCD_Port &= ~ (1<<RS); // RS=0, command reg.
+	LCD_Port |= (1 << EN); //Enable pulse
 	_delay_us(1);
 	LCD_Port &= ~ (1<<EN);
 	_delay_us(200);
@@ -44,7 +42,7 @@ void LCD_command(unsigned char command)
 void LCD_char(unsigned char data)
 {
 	LCD_Port = (LCD_Port & 0x0F) | (data & 0xF0); //Sending upper nibble
-	LCD_Port |= (1 << RS); //RS=1, data reg
+	LCD_Port |= (1<<RS); //RS=1, data reg
 	LCD_Port|= (1<<EN);
 	_delay_us(1);
 	LCD_Port &= ~ (1<<EN);
@@ -59,28 +57,28 @@ void LCD_char(unsigned char data)
 void LCD_string(char *str)
 {
 	int i;
-	for(i=0; str[i]!=0; i++) //Send each char of string till the NULL
+	for(i=0;str[i]!=0;i++) //Send each char of string till the NULL
 	{
-		LCD_Char (str[i]);
+		LCD_char (str[i]);
 	}
 }
 
-void LCD_string_xy(char row, char pos, char *str)
+void LCD_string_xy (char row, char pos, char *str)
 {
 	if (row == 0 && pos < 16)
 	{
-		LCD_Command((pos & 0x0F) | 0x80); //Command of first row and required position<16
+		LCD_command((pos & 0x0F) | 0x80); //Command of first row and required position<16
 	}
 	else if (row == 1 && pos < 16)
 	{
-		LCD_Command((pos & 0x0F) | 0xC0); //Command of first row and required position<16
+		LCD_command((pos & 0x0F) | 0xC0); //Command of first row and required position<16
 	}
 	LCD_string(str); //Call LCD string function
 }
 
 void LCD_clear()
 {
-	LCD_Command (0x01); //Clear display
+	LCD_command (0x01); //Clear display
 	_delay_ms(2);
-	LCD_Command (0x80);	//Cursor at home position
+	LCD_command (0x80); //Cursor at home position
 }
