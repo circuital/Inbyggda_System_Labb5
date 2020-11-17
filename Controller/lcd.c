@@ -1,3 +1,4 @@
+#define F_CPU 16000000UL
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -23,7 +24,7 @@ void LCD_init(void)
 	LCD_command (0x80); //Cursor 1st row 0th position
 }
  
-void LCD_command(unsigned char command)
+void LCD_command(unsigned char cmnd)
 {
 	LCD_Port = (LCD_Port & 0x0F) | (cmnd & 0xF0); //Sending upper nibble
 	LCD_Port &= ~ (1<<RS); // RS=0, command reg.
@@ -79,7 +80,7 @@ void LCD_clear()
 {
 	LCD_command (0x01); //Clear display
 	_delay_ms(2);
-	LCD_Command (0x80);	//Cursor at home position
+	LCD_command (0x80);	//Cursor at home position
 }
 
 void LCD_state_handler(char command)
@@ -89,13 +90,13 @@ void LCD_state_handler(char command)
 		if (LCD_state == 0)
 		{	
 			LCD_state = 1;
-			LCD_Clear();
+			LCD_clear();
 
 		}
 		else if (LCD_state == 1)
 		{
 			LCD_state = 0;
-			LCD_Clear();
+			LCD_clear();
 		}
 	}
 }
@@ -104,7 +105,7 @@ void LCD_state_executer(char command)
 {
 	if(LCD_state == 0)
 	{
-		LCD_Char('5');
+		LCD_char('5');
 	}
 	else if (LCD_state == 1)
 	{
@@ -120,16 +121,16 @@ void STEM_LCD_Print(char command)
 		switch(command)
 		{
 			case '1':
-				LCD_Char('F');
+				LCD_char('F');
 			break;
 			case '2':
-				LCD_Char('B');
+				LCD_char('B');
 			break;
 			case '3':
-				LCD_Char('R');
+				LCD_char('R');
 			break;
 			case '4':
-				LCD_Char('L');
+				LCD_char('L');
 			break;
 			default:
 			break;

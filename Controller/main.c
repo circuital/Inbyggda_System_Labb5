@@ -21,7 +21,7 @@ int main(void)
     uart_init();
     timer_init();
     buttons_init();
-    LCD_Init();
+    LCD_init();
 
     while (1)
     {
@@ -29,5 +29,5 @@ int main(void)
         LCD_state_executer(command);
     }
 
-    //return 0;
+    return 0;
 }
