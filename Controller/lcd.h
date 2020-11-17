@@ -13,4 +13,10 @@ void LCD_String(char *str);
 
 void LCD_String_xy(char row, char pos, char *str);
 
+void LCD_state_handler(char command);
+
+void LCD_state_executer(char command);
+
+void STEM_LCD_Print(char command);
+
 #endif //LCD

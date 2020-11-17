@@ -6,8 +6,9 @@
 #include "serial.h"
 #include "buttons.h"
 #include "timer.h"
+#include "lcd.h"
 
-char command;
+volatile char command;
 
 ISR(TIMER0_COMPA_vect)
 {
@@ -20,9 +21,12 @@ int main(void)
     uart_init();
     timer_init();
     buttons_init();
+    LCD_Init();
 
     while (1)
     {
+        LCD_state_handler(command);
+        LCD_state_executer(command);
     }
 
     return 0;

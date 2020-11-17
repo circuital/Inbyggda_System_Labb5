@@ -6,6 +6,9 @@
 #define LCD_Port PORTD			/* Define LCD data port */
 #define RS PD2				/* Define Register Select pin */
 #define EN PD3				/* Define Enable signal pin */
+
+char lastCommandLCD = '0';
+uint8_t LCD_state = 0;
  
 
 void LCD_Init (void)  /* LCD Initialize function */
@@ -77,4 +80,62 @@ void LCD_Clear()
 	LCD_Command (0x01);		/* Clear display */
 	_delay_ms(2);
 	LCD_Command (0x80);		/* Cursor at home position */
+}
+
+void LCD_state_handler(char command)
+{
+	if(command == 'C')
+	{
+		if (LCD_state == 0)
+		{	
+			LCD_state = 1;
+			LCD_Clear();
+
+		}
+		else if (LCD_state == 1)
+		{
+			LCD_state = 0;
+			LCD_Clear();
+		}
+	}
+}
+
+void LCD_state_executer(char command)
+{
+	if(LCD_state == 0)
+	{
+		LCD_Char('5');
+	}
+	else if (LCD_state == 1)
+	{
+		STEM_LCD_Print(command);
+	}
+}
+
+void STEM_LCD_Print(char command)
+{
+	
+	if (command != lastCommandLCD)
+	{
+		switch(command)
+		{
+			case '1':
+				LCD_Char('F');
+			break;
+			case '2':
+				LCD_Char('B');
+			break;
+			case '3':
+				LCD_Char('R');
+			break;
+			case '4':
+				LCD_Char('L');
+			break;
+			default:
+			break;
+
+		}
+
+	}
+	lastCommandLCD = command;
 }
