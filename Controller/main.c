@@ -4,12 +4,13 @@
 #include <stdio.h>
 
 #include "serial.h"
-#include "buttons.h"
 #include "timer.h"
+#include "buttons.h"
+#include "lcd.h"
 
 char command;
 
-ISR(TIMER0_COMPA_vect)
+ISR(TIMER0_COMPA_vect) //Triggered at compare match
 {
     command = get_button_command();
     uart_send_command(command);
@@ -20,10 +21,11 @@ int main(void)
     uart_init();
     timer_init();
     buttons_init();
+    LCD_init();
 
     while (1)
     {
     }
 
-    return 0;
+    //return 0;
 }

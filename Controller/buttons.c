@@ -3,15 +3,13 @@
 
 #include "buttons.h"
 
-char commandArray[10];
-
 void buttons_init(void)
 {
 	DDRB &= ~(1 << PB0); //FORWARD
 	DDRB &= ~(1 << PB1); // BACK
 	DDRB &= ~(1 << PB2); // LEFT
 	DDRB &= ~(1 << PB3); // RIGHT
-	DDRB &= ~(1 << PB4); // MODE CHANGER
+	DDRB &= ~(1 << PB4); // CHANGEMODE
 	DDRB &= ~(1 << PB5); // START
 }
 
