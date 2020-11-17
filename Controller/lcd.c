@@ -84,7 +84,7 @@ void LCD_clear()
 
 void LCD_state_handler(char command)
 {
-	if(command == 'C')
+	if(command == 'C') //needs a look over
 	{
 		if (LCD_state == 0)
 		{	
