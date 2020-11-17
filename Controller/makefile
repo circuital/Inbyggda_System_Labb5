@@ -4,9 +4,9 @@ BIN = lab5# namn på output-binären
 SOURCES = \
 		  main.c \
 		  buttons.c \
-		  master.c \
 		  serial.c \
-		  timer.c 
+		  timer.c \
+		  lcd.c
 
 PORT =/dev/ttyS3# Arduinons serieport — kan vara ttyACM1, kolla dmesg!
 MCU=atmega328p
