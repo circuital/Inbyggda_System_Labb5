@@ -11,9 +11,9 @@
 static uint8_t state = 0;
 static volatile char controllerCommand;
 
-ISR(USART_RX_vect)
+ISR(USART_RX_vect) //Triggered at UART receive
 {
-controllerCommand = UDR0;
+    controllerCommand = UDR0;
 }
 
 void state_handler()

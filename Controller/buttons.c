@@ -51,24 +51,14 @@ char get_button_command()
     }
     else if (PINB & (1 << PB4))
     {
-        return CHANGEMODE;
+        return CHANGEMODE; //CHANGEMODE
     }
     else if (PINB & (1 << PB5))
     {
-        return START;
+        return START; //START
     }
     else
     {
         return STOP; //STOP
     }
 }
-
-//char* get_button_command_array()
-//{ 
-//    int i;
-//    for (i = 0; i <= 9; i++)
-//    {
-//        commandArray[i] = get_button_command();
-//    }
-//    return commandArray;
-//}
