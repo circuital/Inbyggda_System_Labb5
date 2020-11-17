@@ -8,6 +8,7 @@
 #define EN PD3 //Define Enable signal pin
 
 char lastCommandLCD = '0';
+char lastStateLCD = '0';
 uint8_t LCD_state = 0;
 
 void LCD_init(void)
@@ -22,6 +23,7 @@ void LCD_init(void)
 	LCD_command(0x01); //Clear display screen
     _delay_ms(2);
 	LCD_command (0x80); //Cursor 1st row 0th position
+
 }
  
 void LCD_command(unsigned char cmnd)
@@ -85,7 +87,7 @@ void LCD_clear()
 
 void LCD_state_handler(char command)
 {
-	if(command == 'C') //needs a look over
+	if(command == 'C' && lastStateLCD != command) //needs a look over
 	{
 		if (LCD_state == 0)
 		{	
@@ -99,13 +101,15 @@ void LCD_state_handler(char command)
 			LCD_clear();
 		}
 	}
+	lastStateLCD = command;
 }
 
 void LCD_state_executer(char command)
 {
 	if(LCD_state == 0)
 	{
-		LCD_char('5');
+		LCD_string_xy(0,0,"THIS IS A CAR");
+		LCD_string_xy(1,0,"MOTHERFUCKERS");
 	}
 	else if (LCD_state == 1)
 	{

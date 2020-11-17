@@ -138,7 +138,7 @@ void STEM_save_to_array(char command)
 		STEM_read_array();
 		i = 0;
 	}
-	if (command != '0' && command != lastCommand)
+	else if (command != '0' && command != lastCommand)
 	{
 		STEM_commands[i] = command;
 		i++;
@@ -152,6 +152,7 @@ void STEM_read_array()
 	for(j = 0; j < sizeof(STEM_commands); j++)
 	{
 		STEM_executer(STEM_commands[j]);
+		STEM_commands[j] = '0';
 	}
 	dcmotor1_stop();
 	dcmotor2_stop();
@@ -181,17 +182,14 @@ void STEM_executer(char command)
 		}
 		break;
 	case '3':
-		if (car_dir == 0)
+		while (stop == 0)
 		{
-			while (stop == 0)
+			if (car_dir == 0)
 			{
 				forwardleft();
 				stop = timer_executer();
 			}
-		}
-		else if (car_dir == 1)
-		{
-			while (stop == 0)
+			else if (car_dir == 1)
 			{
 				backleft();
 				stop = timer_executer();
@@ -199,17 +197,14 @@ void STEM_executer(char command)
 		}
 		break;
 	case '4':
-		if (car_dir == 0)
+		while (stop == 0)
 		{
-			while (stop == 0)
+			if (car_dir == 0)
 			{
 				forwardright();
 				stop = timer_executer();
 			}
-		}
-		else if (car_dir == 1)
-		{
-			while (stop == 0)
+			else if (car_dir == 1)
 			{
 				backright();
 				stop = timer_executer();
