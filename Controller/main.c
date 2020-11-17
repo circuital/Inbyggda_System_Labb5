@@ -10,7 +10,7 @@
 
 volatile char command;
 
-ISR(TIMER0_COMPA_vect)
+ISR(TIMER0_COMPA_vect) //Triggered at compare match
 {
     command = get_button_command();
     uart_send_command(command);
@@ -29,5 +29,5 @@ int main(void)
         LCD_state_executer(command);
     }
 
-    return 0;
+    //return 0;
 }

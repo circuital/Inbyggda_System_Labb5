@@ -1,8 +1,9 @@
 #ifndef SERIAL_H_
 #define SERIAL_H_
 
-#define BAUDRATE 38400
-#define UBRR (F_CPU/16/BAUDRATE-1)
+#define F_OSC 16000000 //Clock frequency
+#define BAUD 38400 //Baud rate
+#define UBRR (F_OSC/(16*BAUD))-1 //Baud rate register
 
 void uart_init(void);
 
