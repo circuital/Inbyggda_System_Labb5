@@ -12,6 +12,7 @@ char lastStateLCD = '0';
 uint8_t LCD_state = 0;
 int commandCounter = 0;
 
+
 void LCD_init(void)
 {
 	LCD_Dir = 0xFF; //Make LCD port direction as o/p
@@ -114,15 +115,23 @@ void LCD_state_executer(char command)
 	}
 	else if (LCD_state == 1)
 	{
-		if (commandCounter >= 10 || command == 'S')
+		if ((commandCounter <= 10) && (command == 'S'))
 		{
+			LCD_string_xy(1,0,"ROUTE EXECUTING...");
+			_delay_ms(5000);
 			LCD_clear();
 			commandCounter = 0;
 		}
-		else
+		else if (commandCounter == 10)
+		{
+			LCD_string_xy(1,0,"ROUTE EXECUTING...");
+			_delay_ms(5000);
+			LCD_clear();
+			commandCounter = 0;
+		}
+		else if((commandCounter < 10) && (command != 'C'))
 		{
 			STEM_LCD_Print(command);
-			commandCounter++;
 		}
 		//STEM_LCD_Print(command);
 	}
@@ -137,15 +146,19 @@ void STEM_LCD_Print(char command)
 		{
 			case '1':
 				LCD_char('F');
+				commandCounter++;
 			break;
 			case '2':
 				LCD_char('B');
+				commandCounter++;
 			break;
 			case '3':
 				LCD_char('R');
+				commandCounter++;
 			break;
 			case '4':
 				LCD_char('L');
+				commandCounter++;
 			break;
 			default:
 			break;
