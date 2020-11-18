@@ -8,7 +8,7 @@ SOURCES = \
 		  timer.c \
 		  lcd.c
 
-PORT =/dev/ttyS3# Arduinons serieport — kan vara ttyACM1, kolla dmesg!
+PORT =/dev/ttyS11# Arduinons serieport — kan vara ttyACM1, kolla dmesg!
 MCU=atmega328p
 
 CC =avr-gcc
