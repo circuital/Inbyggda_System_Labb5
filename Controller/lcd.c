@@ -10,6 +10,7 @@
 char lastCommandLCD = '0';
 char lastStateLCD = '0';
 uint8_t LCD_state = 0;
+int commandCounter = 0;
 
 void LCD_init(void)
 {
@@ -113,7 +114,17 @@ void LCD_state_executer(char command)
 	}
 	else if (LCD_state == 1)
 	{
-		STEM_LCD_Print(command);
+		if (commandCounter >= 10 || command == 'S')
+		{
+			LCD_clear();
+			commandCounter = 0;
+		}
+		else
+		{
+			STEM_LCD_Print(command);
+			commandCounter++;
+		}
+		//STEM_LCD_Print(command);
 	}
 }
 
