@@ -22,7 +22,7 @@ int timer_executer()
 	{
 		counter++;
 	}
-	TIFR0 = (1 << OCF0A); //Reset CTC flag
+	TIFR0 |= (1 << OCF0A); //Reset CTC flag
 
 	if (counter == 100)
 	{

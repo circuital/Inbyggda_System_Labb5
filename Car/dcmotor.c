@@ -92,7 +92,7 @@ void dcmotor2_stop(void)
 	PORTB &= ~(1 << PB3); //Set pin 11 on Arduino board to LOW
 }
 
-void basic_executer(char command)
+void basic_executer(char command)//Execute specific button press in basic mode
 {
 	switch (command)
 	{
@@ -129,16 +129,16 @@ void basic_executer(char command)
 	}
 }
 
-void STEM_save_to_array(char command)
+void STEM_save_to_array(char command)// Saves button press to array in STEM mode
 {
 	static int i = 0;
 	static char lastCommand;
-	if (command == 'S' || i == 10)
+	if (command == 'S' || i == 10)// If command is S or 10 commands have been given it moves to STEM_read_array for execution
 	{
 		STEM_read_array();
 		i = 0;
 	}
-	else if (command != '0' && command != lastCommand)
+	else if (command != '0' && command != lastCommand) //Only adds when button is pressed and adds only once per button press.
 	{
 		STEM_commands[i] = command;
 		i++;
@@ -146,7 +146,7 @@ void STEM_save_to_array(char command)
 	lastCommand = command;
 }
 
-void STEM_read_array()
+void STEM_read_array()//Sends commands from array to STEM_executer for execution
 {
 	int j;
 	for(j = 0; j < sizeof(STEM_commands); j++)
@@ -170,7 +170,7 @@ void STEM_executer(char command)
 		while (stop == 0)
 		{
 			forward();
-			stop = timer_executer();
+			stop = timer_executer();//Returns 1 when a second has past
 		}
 		break;
 	case '2':
